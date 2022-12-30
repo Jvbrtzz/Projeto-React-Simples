@@ -1,6 +1,6 @@
-
 import styles from "./Formulario.module.css"
-
+import CampoTexto from "../Components/CampoTexto";
+import { useState } from "react";
 function Formulario(){
     function cadastrar(e){
         e.preventDefault()
@@ -14,41 +14,44 @@ function  limpar(){
     
 }    
 
-function addDadoNome(){
-    let nome = document.getElementById('nome').value;       
-    let valor = document.getElementById('valor').value;        
-    if(nome === "" ){
-        nome = "Erro"
-        valor = "Erro"
-    }else{
-        const novNome = document.createElement("p");
-        const novValor = document.createElement("p");
-        novNome.innerText = `Nome: ${nome}`;
-        document.getElementById("formi").appendChild(novNome);            
-        novValor.innerText = `Valor: ${valor}`;
-        document.getElementById("formi").appendChild(novValor);
+    const [nome, setNome] = useState('')
+    const [valor, setValor] = useState('')
+
+    function Addcard(){
+        const card = document.createElement('p')
+        card.innerHTML = `${nome} e ${valor}`
+        document.getElementById("formi").appendChild(card);  
     }
-}
 
     return(
         <>             
         <form className={styles.form} onSubmit={cadastrar} >
             <h1>Formulário</h1>
-            <div className={styles.label}>
-            <label htmlFor="nome">Nome:</label>
-            
             <div>                
-                <input id="nome" name="nome" className={styles.ipt} type = "text" placeholder="Nome "/>                
-            </div>
-            
-            <label htmlFor="valor">Valor:</label>
-            
+                <CampoTexto                 
+                    id="nome" 
+                    name="nome" 
+                    type = "text" 
+                    label ='Nome' 
+                    placeholder ='Name'
+                    campoValor = {nome}
+                    aoAlterado = {campoValor => setNome(campoValor)}
+                />             
+            </div>          
             <div>
-                <input id="valor" name="valor" className={styles.ipt} type = "number" placeholder="Valor "/>
+            <CampoTexto                 
+                    id="valor" 
+                    name="valor" 
+                    type = "number" 
+                    label ='Valor' 
+                    placeholder ='Valor'
+                    campoValor = {valor}
+                    aoAlterado = {campoValor => setValor(campoValor)}
+            />
             </div>
-            </div>
+          
             <div>                               
-                <button className={styles.btn}onClick={()=> addDadoNome()}>cadastrar</button>
+                <button className={styles.btn}onClick={()=> Addcard()}>cadastrar</button>
                 <button className={styles.btn}onClick={()=> limpar()}>Limpar</button>
             </div>
             <div id="formi"></div>

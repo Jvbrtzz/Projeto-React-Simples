@@ -6,7 +6,7 @@ function Home(){
         <section className={styles.home_container}>
         <h1 className={styles.h1}>Bem vindo a Página inicial</h1>
         <img src={imge} alt="hisoka"/>
-        <LinkButton to='/form' text="Clickar"/>
+        <LinkButton to='/form' text ="Clickar"/>
         </section>
     )
 }
